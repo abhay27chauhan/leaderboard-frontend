@@ -54,7 +54,7 @@ function Login() {
         <Button colorScheme="pink" onClick={submission}>
           Check Rank
         </Button>
-        <Button colorScheme="blue" onClick={updatePoints}>
+        <Button disabled={!userId} colorScheme="blue" onClick={updatePoints}>
           Update Points
         </Button>
       </Stack>
