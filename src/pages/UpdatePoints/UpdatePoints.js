@@ -1,19 +1,31 @@
-import { Button, Heading, Input, Stack } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Heading, Input, Stack } from "@chakra-ui/react";
 import styled from "styled-components";
+
+import { updateUsersPoints } from "api/updateUsersPoint";
+import ButtonWithLoading from "components/ButtonWithLoading/ButtonWithLoading";
 
 function UpdatePoints() {
   const history = useHistory();
   const [points, setPoints] = useState("");
+  const [loading, setLoading] = useState(false);
   const queryParams = new URLSearchParams(history.location?.search);
   const userId = queryParams.get("user");
-  const body = {
-    userId,
-  };
-  console.log(body);
+  const body = useMemo(
+    () => ({
+      userId: userId,
+      points: points,
+    }),
+    [points],
+  );
 
-  const updatePoints = () => {};
+  const updatePoints = async (body) => {
+    setLoading(true);
+    await updateUsersPoints(body);
+    setLoading(false);
+    setPoints("");
+  };
   return (
     <CustomStack>
       <Heading size="lg">Update User Points</Heading>
@@ -26,9 +38,13 @@ function UpdatePoints() {
           value={points}
           onChange={(e) => setPoints(e.target.value)}
         />
-        <Button disabled={!userId} colorScheme="blue" onClick={updatePoints}>
-          Update Points
-        </Button>
+        <ButtonWithLoading
+          isDisabled={!userId || !points}
+          loading={loading}
+          colorScheme="blue"
+          handleClick={() => updatePoints(body)}
+          buttonText="Update Points"
+        />
       </Stack>
     </CustomStack>
   );

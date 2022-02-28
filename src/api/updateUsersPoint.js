@@ -7,8 +7,8 @@ export const updateUsersPoints = async (data) => {
     const reqUrl = `/api/leaderboard/update-points`;
     const result = await axiosApiInstance.post(reqUrl, data);
 
-    if (result.success) {
-      toast.success("Your changes have been saved.");
+    if (result.data.success) {
+      toast.success("user points have been updated.");
       return true;
     }
     return false;
