@@ -1,4 +1,6 @@
 import axios from "axios";
-const axiosApiInstance = axios.create({ baseURL: "http://localhost:5000" });
+const axiosApiInstance = axios.create({
+  baseURL: "https://backend-leaderboard.herokuapp.com",
+});
 
 export default axiosApiInstance;
