@@ -15,6 +15,7 @@ import {
 import useFetch from "Hooks/useFetch/useFetch";
 import styled from "styled-components";
 import useHasSearchedUser from "Hooks/useHasSearchedUser/useHasSearchedUser";
+import Pagination from "components/Pagination/Pagination";
 
 function Leaderboard() {
   const history = useHistory();
@@ -23,7 +24,6 @@ function Leaderboard() {
   const userId = queryParams.get("currentUser");
   const [result, loading, error] = useFetch(pageNumber, userId);
   const hasSearchedUser = useHasSearchedUser(result?.data);
-  console.log(setPageNumber, result);
 
   return loading ? (
     <StyledSpinner
@@ -47,34 +47,43 @@ function Leaderboard() {
       </Stack>
     </StyledStack>
   ) : result ? (
-    <StyledTable size="md" variant="simple">
-      <Thead>
-        <Tr>
-          <Th>Rank</Th>
-          <Th>Name</Th>
-          <Th isNumeric>Points</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {result.data.map((obj, i) => (
-          <StyledTr
-            key={i}
-            backColor={obj.isSearchedUser ? "#c6ebc1" : undefined}
-          >
-            <Td>{obj.rank}</Td>
-            <Td>{obj.name}</Td>
-            <Td isNumeric>{obj.points}</Td>
-          </StyledTr>
-        ))}
-        {!hasSearchedUser && (
-          <StyledTr backColor="#c6ebc1">
-            <Td>{result.currentUserObject.rank}</Td>
-            <Td>{result.currentUserObject.name}</Td>
-            <Td isNumeric>{result.currentUserObject.points}</Td>
-          </StyledTr>
-        )}
-      </Tbody>
-    </StyledTable>
+    <TableContainer>
+      <Pagination
+        className="pagination-bar"
+        currentPage={Number(pageNumber)}
+        totalCount={Number(result.total)}
+        pageSize={10}
+        onPageChange={(page) => setPageNumber(page)}
+      />
+      <Table size="md" variant="simple">
+        <Thead>
+          <Tr>
+            <Th>Rank</Th>
+            <Th>Name</Th>
+            <Th isNumeric>Points</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {result.data.map((obj, i) => (
+            <StyledTr
+              key={i}
+              backColor={obj.isSearchedUser ? "#c6ebc1" : undefined}
+            >
+              <Td>{obj.rank}</Td>
+              <Td>{obj.name}</Td>
+              <Td isNumeric>{obj.points}</Td>
+            </StyledTr>
+          ))}
+          {!hasSearchedUser && result.currentUserObject && (
+            <StyledTr backColor="#c6ebc1">
+              <Td>{result.currentUserObject.rank}</Td>
+              <Td>{result.currentUserObject.name}</Td>
+              <Td isNumeric>{result.currentUserObject.points}</Td>
+            </StyledTr>
+          )}
+        </Tbody>
+      </Table>
+    </TableContainer>
   ) : (
     ""
   );
@@ -86,7 +95,7 @@ const StyledSpinner = styled(Spinner)`
   top: 300px;
 `;
 
-const StyledTable = styled(Table)`
+const TableContainer = styled(Stack)`
   width: 83%;
   position: absolute;
   left: 50%;

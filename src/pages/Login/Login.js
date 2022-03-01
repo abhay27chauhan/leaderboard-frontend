@@ -1,6 +1,6 @@
 import { Button, Heading, Input, Stack } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 function Login() {
