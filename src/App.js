@@ -21,14 +21,14 @@ function App() {
       <ChakraProvider>
         <Navbar />
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
           <Route path="/leaderboard">
             <Leaderboard />
           </Route>
           <Route path="/update-points">
             <UpdatePoints />
+          </Route>
+          <Route path="/">
+            <Login />
           </Route>
         </Switch>
       </ChakraProvider>
