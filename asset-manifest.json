@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/leaderboard-frontend/static/css/main.94ba1f12.css",
+    "main.js": "/leaderboard-frontend/static/js/main.db8ccde7.js",
+    "index.html": "/leaderboard-frontend/index.html",
+    "main.94ba1f12.css.map": "/leaderboard-frontend/static/css/main.94ba1f12.css.map",
+    "main.db8ccde7.js.map": "/leaderboard-frontend/static/js/main.db8ccde7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94ba1f12.css",
+    "static/js/main.db8ccde7.js"
+  ]
+}
