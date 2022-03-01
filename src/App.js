@@ -21,10 +21,10 @@ function App() {
       <ChakraProvider>
         <Navbar />
         <Switch>
-          <Route path="/leaderboard-frontend/leaderboard">
+          <Route path="/leaderboard">
             <Leaderboard />
           </Route>
-          <Route path="/leaderboard-frontend/update-points">
+          <Route path="/update-points">
             <UpdatePoints />
           </Route>
           <Route path="/">
