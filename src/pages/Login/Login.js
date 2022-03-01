@@ -12,12 +12,12 @@ function Login() {
     if (userId) {
       queryParams.append("currentUser", userId);
       history.push({
-        pathname: "/leaderboard",
+        pathname: "/leaderboard-frontend/leaderboard",
         search: queryParams.toString(),
       });
     } else {
       history.push({
-        pathname: "/leaderboard",
+        pathname: "/leaderboard-frontend/leaderboard",
         search: "",
       });
     }
@@ -28,12 +28,12 @@ function Login() {
     if (userId) {
       queryParams.append("user", userId);
       history.push({
-        pathname: "/update-points",
+        pathname: "/leaderboard-frontend/update-points",
         search: queryParams.toString(),
       });
     } else {
       history.push({
-        pathname: "/update-points",
+        pathname: "/leaderboard-frontend/update-points",
         search: "",
       });
     }
